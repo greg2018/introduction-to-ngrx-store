@@ -7,6 +7,8 @@ import { AppState } from './store/models/app-state.model';
 import { ShoppingItem } from './store/models/shopping-item.model';
 import { AddItemAction, DeleteItemAction, LoadShoppingAction } from './store/actions/shopping.actions';
 
+import {selectShoppingStateList } from './store/selects/shopping.selects';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,7 +24,10 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.shoppingItems = this.store.select(store => store.shopping.list);
+   // this.shoppingItems = this.store.select(store => store.shopping.list);
+    this.shoppingItems = this.store.select(selectShoppingStateList);
+    
+
     this.loading$ = this.store.select(store => store.shopping.loading);
     this.error$ = this.store.select(store => store.shopping.error);
 
